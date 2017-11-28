@@ -76,7 +76,51 @@ public class LinkedList<T> {
         }
         return nil
     }
+    
+    public subscript(index: Int) -> T {
+        let node = nodeAt(index)
+        assert(node != nil)
+        return node!.value
+    }
+    
+    private func nodesBeforeAndAfter(index: Int) -> (Node?, Node?) {
+        assert(index >= 0)
+    /*
+     head --> A --> B --> C --> D --> E --> nil
+             next
+
+     head --> A --> B --> C --> D --> E --> F --> nil
+             prev  next
+     */
+        var i = index
+        var next = head
+        var prev: Node?
+        
+        while next != nil && i > 0 {
+            i -= 1
+            prev = next
+            next = next!.next
+        }
+        assert(i == 0)
+        
+        return (prev, next)
+    }
+    
+    public func insert(value: T, atIndex index: Int) {
+        let (prev, next) = nodesBeforeAndAfter(index: index)
+        
+        let newNode = Node(value: value)
+        newNode.previous = prev
+        newNode.next = next
+        prev?.next = newNode
+        next?.previous = newNode
+        
+        if prev == nil {
+            head = newNode
+        }
+    }
 }
+
 
 let list = LinkedList<String>()
 list.append(value: "Hello")
@@ -93,6 +137,15 @@ list.last!.next
 list.nodeAt(0)!.value
 list.nodeAt(1)!.value
 list.nodeAt(2)
+list[0]
+list[1]
+list.insert(value: "Swift", atIndex: 1)
+list[0]
+list[1]
+list[2]
+list.insert(value: "Welcome", atIndex: 0)
+list[0]
+list[1]
 
 
 
