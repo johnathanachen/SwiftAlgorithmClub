@@ -119,6 +119,61 @@ public class LinkedList<T> {
             head = newNode
         }
     }
+    
+    public func removeAll() {
+        head = nil
+    }
+    
+    public func remove(node: Node) -> T {
+        let prev = node.previous
+        let next = node.next
+        
+        if let prev = prev {
+            prev.next = next
+        } else {
+            head = next
+        }
+        next?.previous = prev
+        
+        node.previous = nil
+        node.next = nil
+        return node.value
+    }
+    
+    public func removeLast() -> T {
+        assert(!isEmpty)
+        return remove(node: last!)
+    }
+    
+    public func removeAt(_ index: Int) -> T {
+        let node = nodeAt(index)
+        assert(node != nil)
+        return remove(node: node!)
+    }
+    
+    public func reverse() {
+        var node = head
+        while let currentNode = node {
+            node = currentNode.next
+            swap(&currentNode.next, &currentNode.previous)
+            head = currentNode
+        }
+    }
+    
+    
+}
+
+extension LinkedList: CustomStringConvertible {
+    public var description: String {
+        var s = "["
+        var node = head
+        while node != nil {
+            s += "\(node!.value)"
+            node = node!.next
+            if node != nil { s += ", " }
+        }
+        return s + "]"
+    }
 }
 
 
@@ -140,14 +195,17 @@ list.nodeAt(2)
 list[0]
 list[1]
 list.insert(value: "Swift", atIndex: 1)
-list[0]
-list[1]
-list[2]
 list.insert(value: "Welcome", atIndex: 0)
+list.remove(node: list.first!)
 list[0]
-list[1]
-
-
+list.last!.value
+list.removeLast()
+list
+list.removeAt(1)
+list
+list.append(value: "Swift")
+list.append(value: "World")
+list.reverse()
 
 
 
