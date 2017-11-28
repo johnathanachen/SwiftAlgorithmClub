@@ -160,7 +160,6 @@ public class LinkedList<T> {
         }
     }
     
-    
 }
 
 extension LinkedList: CustomStringConvertible {
@@ -175,6 +174,8 @@ extension LinkedList: CustomStringConvertible {
         return s + "]"
     }
 }
+
+
 
 
 let list = LinkedList<String>()
@@ -206,6 +207,7 @@ list
 list.append(value: "Swift")
 list.append(value: "World")
 list.reverse()
+
 
 
 
