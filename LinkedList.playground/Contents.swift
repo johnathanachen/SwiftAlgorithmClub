@@ -50,6 +50,32 @@ public class LinkedList<T> {
             head = newNode
         }
     }
+    
+    public var count: Int {
+        if var node = head {
+            var c = 1
+            while let next = node.next {
+                node = next
+                c += 1
+            }
+            return c
+        } else {
+            return 0
+        }
+    }
+    
+    public func nodeAt(_ index: Int) -> Node? {
+        if index >= 0 {
+            var node = head
+            var i = index
+            while node != nil {
+                if i == 0 { return node }
+                i -= 1
+                node = node!.next
+            }
+        }
+        return nil
+    }
 }
 
 let list = LinkedList<String>()
@@ -64,5 +90,30 @@ list.first!.previous
 list.first!.next!.value
 list.last!.previous!.value
 list.last!.next
+list.nodeAt(0)!.value
+list.nodeAt(1)!.value
+list.nodeAt(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
