@@ -78,9 +78,9 @@ public struct HashTable<Key: Hashable, Value> {
 
 var hashTable = HashTable<String, String>(capacity: 5)
 
-/*
+
  hashTable["firstName"] = "Steve"   // insert
  let x = hashTable["firstName"]     // lookup
  hashTable["firstName"] = "Tim"     // update
  hashTable["firstName"] = nil       // delete
- */
+
